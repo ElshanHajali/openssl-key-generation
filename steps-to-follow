@@ -1,0 +1,22 @@
+RSA key configuration steps:
+
+# create "certs" package under resources
+# add following keypair, public, private key files to certs package
+
+--------OpenSSL should be configured
+# create rsa key pair (private key)
+openssl genrsa -out keypair.pem 2048
+
+# extract public key from private key
+openssl rsa -in keypair.pem -pubout -out public.pem
+
+# create private key in PKCS#8 format
+openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem
+
+# Remove keypair.pem
+---------------------------------------------------------------------------------------
+
+#Create Properties java class annotate with @ConfigurationProperties(prefix="rsa")
+It takes two parameters (RSAPrivateKey, RSAPublicKey)
+read parameters from application.yml
+---------------------------------------------------------------------------------------
