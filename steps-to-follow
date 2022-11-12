@@ -4,13 +4,13 @@ RSA key configuration steps:
 # add following keypair, public, private key files to certs package
 
 --------OpenSSL should be configured
-# create rsa key pair (private key)
+# create rsa key pair (private key in the keypair.pem)
 openssl genrsa -out keypair.pem 2048
 
 # extract public key from private key
 openssl rsa -in keypair.pem -pubout -out public.pem
 
-# create private key in PKCS#8 format
+# create private key in PKCS#8 format (extract private key from keypair.pem)
 openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out private.pem
 
 # Remove keypair.pem
